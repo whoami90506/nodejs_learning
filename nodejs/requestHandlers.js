@@ -1,4 +1,6 @@
 var querystring = require("querystring");
+var fs = require("fs");
+var exec = require('child_process').exec;
 
 function start(response, postData) {
   console.log("Request handler 'start' was called.");
@@ -28,5 +30,29 @@ function upload(response, postData) {
   response.end();
 }
 
+function capture(response, postData) {
+  console.log("Request handler 'capture' was called.");
+  exec("python3 ./cameraCapture.py", function (error, stdout, stderr) {
+    return show(response, postData);
+  });
+}
+
+function show(response, postData) {
+  console.log("Request handler 'show' was called.");
+  fs.readFile("/tmp/image.jpg", "binary", function(error, file) {
+    if(error) {
+      response.writeHead(500, {"Content-Type": "text/plain"});
+      response.write(error + "\n");
+      response.end();
+    } else {
+      response.writeHead(200, {"Content-Type": "image/jpg"});
+      response.write(file, "binary");
+      response.end();
+    }
+  });
+}
+
 exports.start = start;
 exports.upload = upload;
+exports.capture = capture;
+exports.show = show;
