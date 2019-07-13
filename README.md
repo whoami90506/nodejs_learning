@@ -6,6 +6,7 @@
 - [ ] [學習該如何開發web](https://developer.mozilla.org/zh-TW/docs/Learn)
 - [ ] [Django tutorial](https://docs.djangoproject.com/en/2.2/intro/tutorial01/)
 - [ ] Reactjs
+- [ ] [Ric slide](https://ric2k1.github.io/)
 ## problem
 ### utility
 * [x] context of web (HTML/CSS/) ?
