@@ -8,6 +8,7 @@
 - [ ] Reactjs
 - [ ] [Ric slide](https://ric2k1.github.io/)
 ## problem
+
 ### utility
 * [x] context of web (HTML/CSS/) ?
 * [ ] security of "index of"
@@ -19,3 +20,7 @@
 * [x] npm start ?
     * scrpit in package.json
     * default : node server.js
+
+### Django
+* [x] Run script to `python manager.py`
+    * [folder 'scripts' in app](https://django-extensions.readthedocs.io/en/latest/runscript.html)
