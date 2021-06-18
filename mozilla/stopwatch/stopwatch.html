@@ -1,0 +1,63 @@
+  
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <title>Simple setInterval clock</title>
+        <style>
+            p {
+                font-family: sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="clock">00:00:00</p>
+        <button class="start">Start</button>
+        <button class="reset">Reset</button>
+        <script>
+            const clock = document.querySelector('.clock');
+            const startBtn = document.querySelector('.start');
+            const resetBtn = document.querySelector('.reset');
+
+            var startTime = new Date();
+            var prevTime = 0;
+            var run = false;
+            var createClock;
+
+            function displayTime() {
+                let interval = Math.floor((new Date() - startTime) / 1000) + prevTime;
+                let s = interval % 60;
+                interval = Math.floor(interval / 60);
+                let m = interval % 60;
+                let h = Math.floor(interval / 60);
+                clock.textContent = `${h >= 10 ? h : "0" + h}:${m >= 10 ? m : "0" + m}:${s >= 10 ? s : "0" + s}`
+            }
+
+            function changeState() {
+                if(run){
+                    prevTime += Math.floor((new Date() - startTime) / 1000);
+                    clearInterval(createClock);
+                    
+                    startBtn.textContent = "Start"
+                } else {
+                    startTime = new Date();
+                    displayTime();
+                    createClock = setInterval(displayTime, 1000);
+
+                    startBtn.textContent = "Pause"
+                }
+
+                run = !run;
+            }
+
+            function reset() {
+                if(run)changeState();
+                prevTime = 0;
+                clock.textContent = `00:00:00`
+            }
+
+            startBtn.addEventListener('click', changeState);
+            resetBtn.addEventListener('click', reset);
+        </script>
+    </body>
+</html>
